@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.19)
+project(Path_tracer)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
+
+# Gather the header and source files
+file(GLOB_RECURSE HEADER_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
+list(FILTER HEADER_FILES INCLUDE REGEX "src/*")
+file(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
+list(FILTER SOURCE_FILES INCLUDE REGEX "src/*")
+
+# Build object files for reuse (e.g. in test)
+ADD_LIBRARY(${PROJECT_NAME}_lib STATIC ${HEADER_FILES} ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES})
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME}_lib PROPERTY CXX_STANDARD 17)
+# Unit tests
+add_subdirectory(test)

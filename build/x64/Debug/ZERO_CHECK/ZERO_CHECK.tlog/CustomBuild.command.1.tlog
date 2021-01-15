@@ -1,0 +1,10 @@
+^C:\USERS\ASDF\DESKTOP\DEV\TMP\BUILD\CMAKEFILES\CA933054AA9C01324C74B7CC9525FA6A\GENERATE.STAMP.RULE
+setlocal
+"D:\Program files\CMake\bin\cmake.exe" -SC:/Users/asdf/Desktop/DEV/tmp -BC:/Users/asdf/Desktop/DEV/tmp/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/asdf/Desktop/DEV/tmp/build/Path_tracer.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
