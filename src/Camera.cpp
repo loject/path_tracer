@@ -9,6 +9,7 @@ Ray Camera::getRay(float x, float y) const
     Ray res;
     res.eye = m_origin;
     auto right = m_up.cross(m_forward);
-    res.direction = m_forward + x * right + y * m_up;
+    auto tanFov = tan(m_fov);
+    res.direction = vec3f::unit(m_forward + m_aspectRatio * tanFov * x * right + tanFov * y * m_up);
     return res;
 }

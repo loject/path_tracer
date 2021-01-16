@@ -132,3 +132,28 @@ typedef vec4<char> vec4b;
 typedef vec4<unsigned char> vec4ub;
 typedef vec4<int> vec4i;
 typedef vec4<unsigned int> vec4ui;
+
+
+
+
+
+
+
+/* TODO(loject) 
+
+uint64_t xorshf96(void)
+{
+    static uint64_t x = 123456789, y = 362436069, z = 521288629;
+    uint64_t t;
+    x ^= x << 16;
+    x ^= x >> 5;
+    x ^= x << 1;
+
+    t = x;
+    x = y;
+    y = z;
+    z = t ^ x ^ y;
+
+    return z;
+}
+*/
