@@ -306,8 +306,18 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\BMPImage.hpp" />
+    <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\Camera.hpp" />
+    <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\Scene\Material.hpp" />
+    <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\Scene\Primitive.hpp" />
+    <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\Scene\Scene.hpp" />
+    <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\Scene\Sphere.hpp" />
+    <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\Utils.hpp" />
     <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\math.hpp" />
     <ClCompile Include="C:\Users\asdf\Desktop\DEV\tmp\src\BMPImage.cpp" />
+    <ClCompile Include="C:\Users\asdf\Desktop\DEV\tmp\src\Camera.cpp" />
+    <ClCompile Include="C:\Users\asdf\Desktop\DEV\tmp\src\Scene\Scene.cpp" />
+    <ClCompile Include="C:\Users\asdf\Desktop\DEV\tmp\src\Scene\Sphere.cpp" />
+    <ClCompile Include="C:\Users\asdf\Desktop\DEV\tmp\src\Utils.cpp" />
     <ClCompile Include="C:\Users\asdf\Desktop\DEV\tmp\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>

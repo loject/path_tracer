@@ -4,12 +4,42 @@
     <ClCompile Include="C:\Users\asdf\Desktop\DEV\tmp\src\BMPImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\asdf\Desktop\DEV\tmp\src\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\asdf\Desktop\DEV\tmp\src\Scene\Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\asdf\Desktop\DEV\tmp\src\Scene\Sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\asdf\Desktop\DEV\tmp\src\Utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\asdf\Desktop\DEV\tmp\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\BMPImage.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\Camera.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\Scene\Material.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\Scene\Primitive.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\Scene\Scene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\Scene\Sphere.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\Utils.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\asdf\Desktop\DEV\tmp\src\math.hpp">
