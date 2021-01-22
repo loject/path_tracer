@@ -30,12 +30,14 @@ struct vec2
     T dot(const vec2& t) const { return dot(*this, t); }
     double length() const { return length(*this); }
     vec2 unit() const {return unit(*this); }
+    double distance(const vec2& t) const { return length(*this - t); }
 
     static T dot(const vec2& l, const vec2& r) { return l.x * r.x + l.y * r.y; }
     static double length(const vec2& t) { return sqrt(t.x * t.x + t.y * t.y); }
     static vec2 unit(const vec2& t) { auto len = length(t); return vec2(t.x / len, t.y / len); }
+    static double distance(const vec2& l, const vec2 r) { return length(r - l); }
 
-    friend std::ostream& operator<<(std::ostream& st, const vec2& v) { return st << "vec2(" << +v.x << ", " << + v.y << ")";}
+    friend std::ostream& operator<<(std::ostream& st, const vec2& v) { return st << "vec2(" << +v.x << ", " << + v.y << ")"; }
 };
 
 template<typename T, std::enable_if_t<std::is_trivial_v<T>, int> = 0>
@@ -66,13 +68,15 @@ struct vec3
     vec3 cross(const vec3& t) const { return cross(*this, t); }
     double length() const { return length(*this); }
     vec3 unit() const { return unit(*this); }
+    double distance(const vec3& t) const { return length(*this - t); }
 
     static T dot(const vec3& l, const vec3& r) { return l.x * r.x + l.y * r.y + l.z * r.z; }
     static vec3 cross(const vec3& l, const vec3& r) { return vec3(l.y * r.z - l.z * r.y, l.z * r.x - l.x * r.z, l.x * r.y - l.y * r.x); }
-    static double length(const vec3& t) { return sqrt(t.x * t.x + t.y * t.y + t.z * t.z); }
+    static double length(const vec3& t) { return sqrt(dot(t, t)); }
     static vec3 unit(const vec3& t) { auto len = length(t); return vec3(t.x / len, t.y / len, t.z / len); }
+    static double distance(const vec3& l, const vec3 r) { return length(r - l); }
 
-    friend std::ostream& operator<<(std::ostream& st, const vec3& v) { return st << "vec3(" << +v.x << ", " << + v.y << ", " << + v.z << ")";}
+    friend std::ostream& operator<<(std::ostream& st, const vec3& v) { return st << "vec3(" << +v.x << ", " << + v.y << ", " << + v.z << ")"; }
 };
 
 template<typename T, std::enable_if_t<std::is_trivial_v<T>, int> = 0>
@@ -102,13 +106,15 @@ struct vec4
     T dot(const vec4& t) const { return dot(*this, t); }
     double length() const { return length(*this); }
     vec4 unit() const { return unit(*this); }
+    double distance(const vec4& t) const { return length(*this - t); }
 
 
     static T dot(const vec4& l, const vec4& r) { return l.x * r.x + l.y * r.y + l.z * r.z + l.w * r.w; }
     static double length(const vec4& t) { return sqrt(t.x * t.x + t.y * t.y + t.z * t.z + t.w * t.w); }
     static vec4 unit(const vec4& t) { auto len = length(t); return vec4(t.x / len, t.y / len, t.z / len, t.w / len); }
+    static double distance(const vec4& l, const vec4 r) { return length(r - l); }
 
-    friend std::ostream& operator<<(std::ostream& st, const vec4& v) { return st << "vec4(" << +v.x << ", " << + v.y << ", " << + v.z << ", " << + v.w << ")";}
+    friend std::ostream& operator<<(std::ostream& st, const vec4& v) { return st << "vec4(" << +v.x << ", " << + v.y << ", " << + v.z << ", " << + v.w << ")"; }
 };
 
 

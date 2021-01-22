@@ -8,6 +8,7 @@
 struct Scene
 {
     std::vector<Primitive*> primitives;
+    Material defaultMaterial;
 
     bool nearestIntersect(const Ray& ray, Hit& hit) const; 
 };

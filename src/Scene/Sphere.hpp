@@ -14,7 +14,7 @@ struct Sphere: public Primitive
     Material material;
 
     Sphere() {}
-    Sphere(vec3f Center = vec3f(0, 0, 0), Material material = Material(vec3f(0.5, 0.5, 0.5), 0.5), float Radius = 1.0f): Center(Center), material(material), Radius(Radius) { assert( Radius > 0); }
+    Sphere(vec3f Center, Material material, float Radius): Center(Center), material(material), Radius(Radius) { assert( Radius > 0); }
 
     bool intersect(const Ray& ray, Hit& hit) const override; 
 };
