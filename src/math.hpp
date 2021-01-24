@@ -3,6 +3,8 @@
 #include <math.h>
 #include <iostream>
 
+template<typename T> inline T clamp(T val, T minVal, T maxVal) { return val < minVal ? minVal : val > maxVal ? maxVal : val; }
+
 template<typename T, std::enable_if_t<std::is_trivial_v<T>, int> = 0>
 struct vec2
 {
@@ -31,11 +33,15 @@ struct vec2
     double length() const { return length(*this); }
     vec2 unit() const {return unit(*this); }
     double distance(const vec2& t) const { return length(*this - t); }
+    vec2 clamp(T minVal, T maxVal) { return clamp(*this, minVal, maxVal); }
+    vec2 clamp(const vec2& minVal, const vec2& maxVal) { return clamp(*this, minVal, maxVal); }
 
     static T dot(const vec2& l, const vec2& r) { return l.x * r.x + l.y * r.y; }
     static double length(const vec2& t) { return sqrt(t.x * t.x + t.y * t.y); }
     static vec2 unit(const vec2& t) { auto len = length(t); return vec2(t.x / len, t.y / len); }
     static double distance(const vec2& l, const vec2 r) { return length(r - l); }
+    static vec2 clamp(const vec2& v, T minVal, T maxVal) { return clamp(v, vec2(minVal), vec2(maxVal)); }
+    static vec2 clamp(const vec2& v, const vec2& minVal, const vec2& maxVal) { return vec2(::clamp(v.x, minVal.x, maxVal.x), ::clamp(v.y, minVal.y, maxVal.y)); }
 
     friend std::ostream& operator<<(std::ostream& st, const vec2& v) { return st << "vec2(" << +v.x << ", " << + v.y << ")"; }
 };
@@ -69,12 +75,16 @@ struct vec3
     double length() const { return length(*this); }
     vec3 unit() const { return unit(*this); }
     double distance(const vec3& t) const { return length(*this - t); }
+    vec3 clamp(T minVal, T maxVal) { return clamp(*this, vec3(minVal), vec3(maxVal)); }
+    vec3 clamp(const vec3& minVal, const vec3& maxVal) { return clamp(*this, minVal, maxVal); }
 
     static T dot(const vec3& l, const vec3& r) { return l.x * r.x + l.y * r.y + l.z * r.z; }
     static vec3 cross(const vec3& l, const vec3& r) { return vec3(l.y * r.z - l.z * r.y, l.z * r.x - l.x * r.z, l.x * r.y - l.y * r.x); }
     static double length(const vec3& t) { return sqrt(dot(t, t)); }
     static vec3 unit(const vec3& t) { auto len = length(t); return vec3(t.x / len, t.y / len, t.z / len); }
     static double distance(const vec3& l, const vec3 r) { return length(r - l); }
+    static vec3 clamp(const vec3& v, T minVal, T maxVal) { return clamp(v, vec3(minVal), vec3(maxVal)); }
+    static vec3 clamp(const vec3& v, const vec3& minVal, const vec3& maxVal) { return vec3(::clamp(v.x, minVal.x, maxVal.x), ::clamp(v.y, minVal.y, maxVal.y), ::clamp(v.z, minVal.z, maxVal.z)); }
 
     friend std::ostream& operator<<(std::ostream& st, const vec3& v) { return st << "vec3(" << +v.x << ", " << + v.y << ", " << + v.z << ")"; }
 };
@@ -107,12 +117,16 @@ struct vec4
     double length() const { return length(*this); }
     vec4 unit() const { return unit(*this); }
     double distance(const vec4& t) const { return length(*this - t); }
+    vec4 clamp(T minVal, T maxVal) { return clamp(*this, minVal, maxVal); }
+    vec4 clamp(const vec4& minVal, const vec4& maxVal) { return clamp(*this, minVal, maxVal); }
 
 
     static T dot(const vec4& l, const vec4& r) { return l.x * r.x + l.y * r.y + l.z * r.z + l.w * r.w; }
     static double length(const vec4& t) { return sqrt(t.x * t.x + t.y * t.y + t.z * t.z + t.w * t.w); }
     static vec4 unit(const vec4& t) { auto len = length(t); return vec4(t.x / len, t.y / len, t.z / len, t.w / len); }
     static double distance(const vec4& l, const vec4 r) { return length(r - l); }
+    static vec4 clamp(const vec4& v, T minVal, T maxVal) { return clamp(v, vec4(minVal), vec4(maxVal)); }
+    static vec4 clamp(const vec4& v, const vec4& minVal, const vec4& maxVal) { return vec4(::clamp(v.x, minVal.x, maxVal.x), ::clamp(v.y, minVal.y, maxVal.y), ::clamp(v.z, minVal.z, maxVal.z), ::clamp(v.z, minVal.z, maxVal.z)); }
 
     friend std::ostream& operator<<(std::ostream& st, const vec4& v) { return st << "vec4(" << +v.x << ", " << + v.y << ", " << + v.z << ", " << + v.w << ")"; }
 };
