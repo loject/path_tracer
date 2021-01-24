@@ -361,6 +361,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-bin/Debug/Path_tracer.exe
-bin/Debug/Path_tracer.ilk
-bin/Debug/Path_tracer.pdb

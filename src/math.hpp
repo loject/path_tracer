@@ -28,6 +28,7 @@ struct vec2
     vec2 operator*(T t) const { return vec2(x * t, y * t); }
     friend vec2 operator*(T l, const vec2& r) { return vec2(r.x * l, r.y * l); }
     vec2 operator/(T t) const { return vec2(x / t, y / t); }
+    vec2 operator-() const { return vec2(-x, -y); }
 
     T dot(const vec2& t) const { return dot(*this, t); }
     double length() const { return length(*this); }
@@ -69,6 +70,7 @@ struct vec3
     vec3 operator*(T t) const { return vec3(x * t, y * t, z * t); }
     friend vec3 operator*(T l, const vec3& r) { return vec3(l * r.x, l * r.y, l * r.z); }
     vec3 operator/(T t) const { return vec3(x / t, y / t, z / t); }
+    vec3 operator-() const { return vec3(-x, -y, -z); }
 
     T dot(const vec3& t) const { return dot(*this, t); }
     vec3 cross(const vec3& t) const { return cross(*this, t); }
@@ -112,6 +114,8 @@ struct vec4
     vec4 operator*(T t) const { return vec4(x * t, y * t, z * t, w * t); }
     friend vec4 operator*(T l, const vec4& r) { return vec4(l * r.x, l * r.y, l * r.z, l * r.w); }
     vec4 operator/(T t) const { return vec4(x / t, y / t, z / t, w / t); }
+    vec4 operator-() const { return vec4(-x, -y, -z, -w); }
+
 
     T dot(const vec4& t) const { return dot(*this, t); }
     double length() const { return length(*this); }
