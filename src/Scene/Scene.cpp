@@ -13,7 +13,7 @@ bool Scene::nearestIntersect(const Ray& ray, Hit& hit) const
         if (primitives[i]->intersect(ray, currentHit))
         {
             double dist = ray.eye.distance(currentHit.point);
-            if (dist < neareastDistance && dist > 1e-4)
+            if (dist < neareastDistance && dist > ray.near)
             {
                 found = true;
                 neareastDistance = dist;

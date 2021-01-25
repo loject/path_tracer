@@ -14,8 +14,8 @@ struct Plane: public Primitive
     Material material;
 
     Plane() {}
-    Plane(vec3f PlanePoint, Material material, vec3f Normal)
-        :PlanePoint(PlanePoint), material(material), Normal(Normal.unit()) { }
+    Plane(vec3f PlanePoint, vec3f Normal) :PlanePoint(PlanePoint), Normal(Normal.unit()) { }
+    Plane(vec3f PlanePoint, vec3f Normal, Material material) :PlanePoint(PlanePoint), Normal(Normal.unit()), material(material) { }
 
     bool intersect(const Ray& ray, Hit& hit) const override; 
 };
