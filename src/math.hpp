@@ -61,6 +61,7 @@ struct vec3
         struct { T r, g, b; };
         struct { T X, Y, Z; };
         struct { T R, G, B; };
+        struct { T R, theta, phi; };
         T raw[3];
     };
     
@@ -97,6 +98,8 @@ struct vec3
     static double distance(const vec3& l, const vec3 r) { return length(r - l); }
     static vec3 clamp(const vec3& v, T minVal, T maxVal) { return clamp(v, vec3(minVal), vec3(maxVal)); }
     static vec3 clamp(const vec3& v, const vec3& minVal, const vec3& maxVal) { return vec3(::clamp(v.x, minVal.x, maxVal.x), ::clamp(v.y, minVal.y, maxVal.y), ::clamp(v.z, minVal.z, maxVal.z)); }
+    static vec3 convertToSpherical(const vec3 v) { return vec3(length(v), atan(sqrt(v.x * v.x + v.y * v.y) / v.z), atan(v.y / v.x)); }
+    static vec3 convertToDescartes(const vec3 v) { return vec3(v.R * sin(v.theta) * cos(v.phi), v.R * sin(v.theta) * sin(v.phi), v.R * cos(v.theta)); }
 
     friend std::ostream& operator<<(std::ostream& st, const vec3& v) { return st << "vec3(" << +v.x << ", " << + v.y << ", " << + v.z << ")"; }
 };
