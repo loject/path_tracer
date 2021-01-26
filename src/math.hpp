@@ -100,6 +100,7 @@ struct vec3
     static vec3 clamp(const vec3& v, const vec3& minVal, const vec3& maxVal) { return vec3(::clamp(v.x, minVal.x, maxVal.x), ::clamp(v.y, minVal.y, maxVal.y), ::clamp(v.z, minVal.z, maxVal.z)); }
     static vec3 convertToSpherical(const vec3 v) { return vec3(length(v), atan(sqrt(v.x * v.x + v.y * v.y) / v.z), atan(v.y / v.x)); }
     static vec3 convertToDescartes(const vec3 v) { return vec3(v.R * sin(v.theta) * cos(v.phi), v.R * sin(v.theta) * sin(v.phi), v.R * cos(v.theta)); }
+    template<std::enable_if_t<std::is_floating_point_v<T>, int> = 0> static bool AreEqual(const vec3& l, const vec3 r, T eps) { return abs(l.x - r.x) < eps && abs(l.y - r.y) < eps && abs(l.z - r.z) < eps;}
 
     friend std::ostream& operator<<(std::ostream& st, const vec3& v) { return st << "vec3(" << +v.x << ", " << + v.y << ", " << + v.z << ")"; }
 };
