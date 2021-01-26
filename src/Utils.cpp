@@ -1,5 +1,8 @@
 #include "Utils.hpp"
 #include <cassert>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
 
 vec3f RandomUnitVector()
 {
@@ -26,4 +29,14 @@ vec3f RandomUnitVectorInHemisphereOf(vec3f dir)
 {
     auto rndVec = RandomUnitVector();
     return rndVec.dot(dir) > 0 ? rndVec : -rndVec;
+}
+
+std::string getCurrentDateTImeStr()
+{
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    std::ostringstream oss;
+    oss << std::put_time(&tm, "%d-%m-%Y %H-%M-%S");
+    auto str = oss.str();
+    return str;
 }

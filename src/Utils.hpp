@@ -27,3 +27,6 @@ struct Hit
 vec3f RandomUnitVector();
 vec3f RandomUnitVectorInCone(vec3f coneAxis, float angle);
 vec3f RandomUnitVectorInHemisphereOf(vec3f dir);
+
+std::string getCurrentDateTImeStr();
+

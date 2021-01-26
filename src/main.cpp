@@ -12,9 +12,9 @@
 
 const size_t IMAGE_WIDTH = 1280;
 const size_t IMAGE_HEIGHT = 720;
-const char* IMAGE_FILE_NAME = "tmp.bmp";
-const size_t SAMPLE_PER_PIXEL = 4;
-const size_t MAX_DEPTH = 1;
+const std::string IMAGE_FILE_NAME = getCurrentDateTImeStr() + ".bmp";
+const size_t SAMPLE_PER_PIXEL = 16;
+const size_t MAX_DEPTH = 16;
 
 vec3f trace(const Scene& scene, const Ray& ray, size_t level)
 {
@@ -23,8 +23,9 @@ vec3f trace(const Scene& scene, const Ray& ray, size_t level)
     if (!scene.nearestIntersect(ray, hit))
         return scene.defaultMaterial.color;
 
+    
     // auto startTimePoint = std::chrono::high_resolution_clock::now();
-    auto randomVector = RandomUnitVectorInCone((ray.direction + 2 * hit.normal).unit(), hit.material.roughness * 3.1415926);
+    auto randomVector = RandomUnitVectorInCone((ray.direction + 2 * hit.normal).unit(), hit.material.roughness * 3.1415926 / 2);
     // auto endTimePoint = std::chrono::high_resolution_clock::now();
     // std::cout << "Time for calc random vector - " << std::chrono::duration_cast<std::chrono::nanoseconds>(endTimePoint - startTimePoint).count() / 1000. << "us." << std::endl;
     
@@ -41,7 +42,7 @@ int main()
     scene.defaultMaterial.color = vec3f(.25, .4, .66);
     scene.primitives.push_back(new Sphere(vec3f(0, 0, 2.5), Material(vec3f(.5, .5, .5), .5), 1.));
     scene.primitives.push_back(new Sphere(vec3f(4, 0, 2.5), Material(vec3f(.5, .5, .5), .02), 2.));
-    scene.primitives.push_back(new Plane(vec3f(0, -.5, 0), vec3f(0., 1., 0.), Material(vec3f(.2, .2, .2), 0.065)));
+    scene.primitives.push_back(new Plane(vec3f(0, -.5, 0), vec3f(0., 1., 0.), Material(vec3f(.2, .2, .2), 0.95)));
     scene.primitives.push_back(new Plane(vec3f(0, -.5, 0), vec3f(1., 1., 0.), Material(vec3f(.2, .32, .2), 0.4)));
     scene.primitives.push_back(new Triangle(vec3f(-5., 0, 5), vec3f(0., 5., 5), vec3f(5., 0., 5), Material(vec3f(.2, .7, .2), .5)));
     
