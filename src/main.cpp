@@ -14,7 +14,7 @@ const size_t IMAGE_WIDTH = 1280;
 const size_t IMAGE_HEIGHT = 720;
 const char* IMAGE_FILE_NAME = "tmp.bmp";
 const size_t SAMPLE_PER_PIXEL = 4;
-const size_t MAX_DEPTH = 16;
+const size_t MAX_DEPTH = 1;
 
 vec3f trace(const Scene& scene, const Ray& ray, size_t level)
 {
@@ -23,7 +23,11 @@ vec3f trace(const Scene& scene, const Ray& ray, size_t level)
     if (!scene.nearestIntersect(ray, hit))
         return scene.defaultMaterial.color;
 
+    // auto startTimePoint = std::chrono::high_resolution_clock::now();
     auto randomVector = RandomUnitVectorInCone((ray.direction + 2 * hit.normal).unit(), hit.material.roughness * 3.1415926);
+    // auto endTimePoint = std::chrono::high_resolution_clock::now();
+    // std::cout << "Time for calc random vector - " << std::chrono::duration_cast<std::chrono::nanoseconds>(endTimePoint - startTimePoint).count() / 1000. << "us." << std::endl;
+    
     Ray reflect(hit.point, randomVector, ray.near);
     return hit.material.color + 0.3 * trace(scene, reflect, level + 1);
 }
@@ -32,10 +36,11 @@ int main()
 {
     auto startTimePoint = std::chrono::high_resolution_clock::now();
     BMPImage oImage(IMAGE_WIDTH, IMAGE_HEIGHT, vec4ub(0, 127, 0, 255));
-    Camera camera(vec3f(0, 0, 0), vec3f(0, 1, 0), vec3f(0, 0, 1), 3.1415926 / 3);
+    Camera camera(vec3f(0, 0, 0), vec3f(0, 1, 0), vec3f(0, 0, 1), 3.1415926 / 5);
     Scene scene;
     scene.defaultMaterial.color = vec3f(.25, .4, .66);
     scene.primitives.push_back(new Sphere(vec3f(0, 0, 2.5), Material(vec3f(.5, .5, .5), .5), 1.));
+    scene.primitives.push_back(new Sphere(vec3f(4, 0, 2.5), Material(vec3f(.5, .5, .5), .02), 2.));
     scene.primitives.push_back(new Plane(vec3f(0, -.5, 0), vec3f(0., 1., 0.), Material(vec3f(.2, .2, .2), 0.065)));
     scene.primitives.push_back(new Plane(vec3f(0, -.5, 0), vec3f(1., 1., 0.), Material(vec3f(.2, .32, .2), 0.4)));
     scene.primitives.push_back(new Triangle(vec3f(-5., 0, 5), vec3f(0., 5., 5), vec3f(5., 0., 5), Material(vec3f(.2, .7, .2), .5)));
@@ -53,7 +58,7 @@ int main()
             clr = clr / SAMPLE_PER_PIXEL;
             oImage.setPixel(x, y, vec4ub(clr.x * 255, clr.y * 255, clr.z * 255, 255));
         }
-        printf("%zu line complate\n", y);
+        // printf("%zu line complate\n", y);
     }
 
     oImage.changeEndian();
