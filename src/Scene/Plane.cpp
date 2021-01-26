@@ -7,10 +7,10 @@ bool Plane::intersect(const Ray& ray, Hit& hit) const
 
     vec3f PE = PlanePoint - ray.eye; 
     float t = PE.dot(Normal) / denom;
-    if (t < 0) return false;
+    if (t < ray.near) return false;
     
     hit.point = ray.eye + t * ray.direction;
-    hit.normal = Normal;
+    hit.normal = signbit(denom) ? Normal : -Normal;
     hit.material = material; 
 
     return true;

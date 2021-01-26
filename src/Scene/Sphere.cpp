@@ -16,10 +16,10 @@ bool Sphere::intersect(const Ray& ray, Hit& hit) const
     if (t0 > t1)
         std::swap(t0, t1);
 
-    if (t0 < 0)
+    if (t0 < ray.near)
     {
         t0 = t1;/*if t0 negative use t1*/
-        if (t0 < 0)
+        if (t0 < ray.near)
         {
             return false;/* both t0 and t1 negative */
         }
