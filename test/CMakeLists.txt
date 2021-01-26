@@ -14,7 +14,7 @@ foreach(FILE ${TEST_FILES})
 endforeach(FILE ${TEST_FILES})
 
 # Assign the include directories
-include_directories(${Boost_INCLUDE_DIRS} ${PROJECT_NAME}/src)
+include_directories(${Boost_INCLUDE_DIRS} ../src)
 
 # Compiler option for files with a lot of tests cases
 add_definitions(/bigobj)
