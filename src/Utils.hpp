@@ -10,7 +10,7 @@ struct Ray
     float near;
 
     Ray() {}
-    Ray(vec3f origin, vec3f direction, float near = 1e-4):eye(origin), direction(direction) {}
+    Ray(vec3f origin, vec3f direction, float near = 1e-4):eye(origin), direction(direction), near(near) {}
 };
 
 struct Hit
