@@ -98,7 +98,7 @@ struct vec3
     static double distance(const vec3& l, const vec3 r) { return length(r - l); }
     static vec3 clamp(const vec3& v, T minVal, T maxVal) { return clamp(v, vec3(minVal), vec3(maxVal)); }
     static vec3 clamp(const vec3& v, const vec3& minVal, const vec3& maxVal) { return vec3(::clamp(v.x, minVal.x, maxVal.x), ::clamp(v.y, minVal.y, maxVal.y), ::clamp(v.z, minVal.z, maxVal.z)); }
-    static vec3 convertToSpherical(const vec3 v) { return vec3(length(v), atan(sqrt(v.x * v.x + v.y * v.y) / v.z), atan(v.y / v.x)); }
+    static vec3 convertToSpherical(const vec3 v) { return vec3(length(v), atan2(sqrt(v.x * v.x + v.y * v.y), v.z), atan2(v.y, v.x)); }
     static vec3 convertToDescartes(const vec3 v) { return vec3(v.R * sin(v.theta) * cos(v.phi), v.R * sin(v.theta) * sin(v.phi), v.R * cos(v.theta)); }
     template<std::enable_if_t<std::is_floating_point_v<T>, int> = 0> static bool AreEqual(const vec3& l, const vec3 r, T eps) { return abs(l.x - r.x) < eps && abs(l.y - r.y) < eps && abs(l.z - r.z) < eps;}
 
