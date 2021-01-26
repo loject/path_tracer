@@ -1,6 +1,7 @@
 #pragma once
 #include <type_traits>
 #include <math.h>
+#include <cassert>
 #include <iostream>
 
 template<typename T> inline T clamp(T val, T minVal, T maxVal) { return val < minVal ? minVal : val > maxVal ? maxVal : val; }
@@ -30,12 +31,16 @@ struct vec2
     vec2 operator/(T t) const { return vec2(x / t, y / t); }
     vec2 operator-() const { return vec2(-x, -y); }
 
+    bool operator==(const vec2 r) const { return x == r.x && y == r.y; }
+
+
     T dot(const vec2& t) const { return dot(*this, t); }
     double length() const { return length(*this); }
     vec2 unit() const {return unit(*this); }
     double distance(const vec2& t) const { return length(*this - t); }
     vec2 clamp(T minVal, T maxVal) { return clamp(*this, minVal, maxVal); }
     vec2 clamp(const vec2& minVal, const vec2& maxVal) { return clamp(*this, minVal, maxVal); }
+
 
     static T dot(const vec2& l, const vec2& r) { return l.x * r.x + l.y * r.y; }
     static double length(const vec2& t) { return sqrt(t.x * t.x + t.y * t.y); }
@@ -61,6 +66,7 @@ struct vec3
     
     vec3() {}
     vec3(T f): x(f), y(f), z(f) {}
+    vec3(vec2<T> v, T z): x(v.x), y(v.y), z(z) {}
     vec3(T x, T y, T z): x(x), y(y), z(z) {}
 
 
@@ -72,6 +78,9 @@ struct vec3
     vec3 operator/(T t) const { return vec3(x / t, y / t, z / t); }
     vec3 operator-() const { return vec3(-x, -y, -z); }
 
+    bool operator==(const vec3 r) const { return x == r.x && y == r.y && z == r.z; }
+
+
     T dot(const vec3& t) const { return dot(*this, t); }
     vec3 cross(const vec3& t) const { return cross(*this, t); }
     double length() const { return length(*this); }
@@ -79,6 +88,7 @@ struct vec3
     double distance(const vec3& t) const { return length(*this - t); }
     vec3 clamp(T minVal, T maxVal) { return clamp(*this, vec3(minVal), vec3(maxVal)); }
     vec3 clamp(const vec3& minVal, const vec3& maxVal) { return clamp(*this, minVal, maxVal); }
+
 
     static T dot(const vec3& l, const vec3& r) { return l.x * r.x + l.y * r.y + l.z * r.z; }
     static vec3 cross(const vec3& l, const vec3& r) { return vec3(l.y * r.z - l.z * r.y, l.z * r.x - l.x * r.z, l.x * r.y - l.y * r.x); }
@@ -105,6 +115,8 @@ struct vec4
     
     vec4() {}
     vec4(T f): x(f), y(f), z(f), w(f) {}
+    vec4(vec3<T> v, T w): x(v.x), y(v.y), z(v.z), w(w) {}
+    vec4(vec2<T> v, T z, T w): x(v.x), y(v.y), z(z), w(w) {}
     vec4(T x, T y, T z, T w): x(x), y(y), z(z), w(w) {}
 
 
@@ -115,6 +127,8 @@ struct vec4
     friend vec4 operator*(T l, const vec4& r) { return vec4(l * r.x, l * r.y, l * r.z, l * r.w); }
     vec4 operator/(T t) const { return vec4(x / t, y / t, z / t, w / t); }
     vec4 operator-() const { return vec4(-x, -y, -z, -w); }
+
+    bool operator==(const vec4 r) const { return x == r.x && y == r.y && z == r.z && w == r.w; }
 
 
     T dot(const vec4& t) const { return dot(*this, t); }
