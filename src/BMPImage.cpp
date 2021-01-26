@@ -1,6 +1,6 @@
 #include "BMPImage.hpp"
 #include <fstream>
-#include <windows.h>
+
 bool BMPImage::SaveBMPImage(std::string_view FileName) const
 {
     std::ofstream file(FileName.data(), std::ios_base::binary);

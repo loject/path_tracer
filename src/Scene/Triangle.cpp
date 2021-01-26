@@ -3,7 +3,6 @@
 #include "Plane.hpp"
 
 #include <cmath>
-#include <iostream>
 
 bool Triangle::intersect(const Ray& ray, Hit& hit) const
 {
