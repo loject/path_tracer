@@ -149,6 +149,60 @@ struct vec4
     friend std::ostream& operator<<(std::ostream& st, const vec4& v) { return st << "vec4(" << +v.x << ", " << + v.y << ", " << + v.z << ", " << + v.w << ")"; }
 };
 
+template<typename T, std::enable_if_t<std::is_trivial_v<T>, int> = 0>
+struct mat4
+{
+    union
+    {
+        struct 
+        {
+            T a00, a01, a02, a03;
+            T a10, a11, a12, a13;
+            T a20, a21, a22, a23;
+            T a30, a31, a32, a33;
+        };
+        T raw[16];
+    };
+
+    mat4(T v = 0) { for (size_t i = 0; i < 16; ++i) raw[i] = v; }
+    mat4(T a00, T a01, T a02, T a03,
+         T a10, T a11, T a12, T a13,
+         T a20, T a21, T a22, T a23,
+         T a30, T a31, T a32, T a33) { for (size_t i = 0; i < 16; ++i) raw[i] = v; }
+    
+    mat4 operator+(const mat4& t) const { mat4 res; for (size_t i = 0; i < 16; ++i) res.raw[i] = raw[i] + t.raw[i]; return res; }
+    mat4 operator-(const mat4& t) const { mat4 res; for (size_t i = 0; i < 16; ++i) res.raw[i] = raw[i] - t.raw[i]; return res; }
+    mat4 operator*(T t) const  { mat4 res; for (size_t i = 0; i < 16; ++i) res.raw[i] = raw[i] * t; return res; }
+    vec4<T> operator*(const vec4<T>& t) const  { return vec4<T>(a00 * t.x + a01 * t.y + a02 * t.z + a03 * t.w,
+                                                        a10 * t.x + a11 * t.y + a12 * t.z + a13 * t.w,
+                                                        a20 * t.x + a21 * t.y + a22 * t.z + a23 * t.w,
+                                                        a30 * t.x + a31 * t.y + a32 * t.z + a33 * t.w); }
+
+
+    /* create a rotation matrix around a vector 
+    https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle */
+    static mat4 rotateMatrix(const vec3<T> v, float angle)
+    {
+        mat4 res;
+        auto cosa = cos(angle);
+        auto sina = sin(angle);
+        res.a00 = cosa + (1 - cosa) * v.x * v.x;
+        res.a01 = (1 - cosa) * v.x * v.y - sina * v.z;
+        res.a02 = (1 - cosa) * v.x * v.z + sina * v.y;
+        
+        res.a10 = (1 - cosa) * v.y * v.z + sina * v.z;
+        res.a11 = cosa + (1 - cosa) * v.y * v.y;
+        res.a12 = (1 - cosa) * v.y * v.z - sina * v.x;
+        
+        res.a20 = (1 - cosa) * v.z * v.x - sina * v.y;
+        res.a21 = (1 - cosa) * v.z * v.y - sina * v.x;
+        res.a22 = cosa + (1 - cosa) * v.z * v.z;
+
+        res.a33 = 1;
+        return res;
+    }
+};
+
 
 typedef vec2<float> vec2f;
 typedef vec2<double> vec2d;
