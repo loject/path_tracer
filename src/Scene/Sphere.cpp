@@ -1,6 +1,6 @@
 #include "Sphere.hpp"
 
-bool Sphere::intersect(const Ray& ray, Hit& hit) const
+bool Sphere::intersect(const vec3f& Center, float Radius, const Ray& ray, Hit& hit)
 {
     if (ray.direction.length() == 0) return false;
     vec3f OriginToSphereCenterDir = Center - ray.eye;
@@ -27,6 +27,6 @@ bool Sphere::intersect(const Ray& ray, Hit& hit) const
     
     hit.point = ray.eye + ray.direction * t0;
     hit.normal = (hit.point - Center).unit();
-    hit.material = material;
+    
     return true;
 }

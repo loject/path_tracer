@@ -4,7 +4,7 @@
 
 #include <cmath>
 
-bool Triangle::intersect(const Ray& ray, Hit& hit) const
+bool Triangle::intersect(const vec3f& Point0, const vec3f& Point1, const vec3f& Point2, const Ray& ray, Hit& hit)
 {
     if (!Plane::intersect(Point0, (Point2 - Point0).cross(Point1 - Point0), ray, hit)) return false;
     vec3f P0P = (Point0 - hit.point).unit();
@@ -18,7 +18,5 @@ bool Triangle::intersect(const Ray& ray, Hit& hit) const
 
     if (abs(a0 + a1 + a2 - 6.28318530718) > 1e-4) return false;
 
-    hit.material = material;
-    
     return true;
 } 
