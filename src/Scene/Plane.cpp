@@ -1,6 +1,6 @@
 #include "Plane.hpp"
 
-bool Plane::intersect(const Ray& ray, Hit& hit) const
+bool Plane::intersect(vec3f PlanePoint, vec3f Normal, const Ray& ray, Hit& hit)
 {
     float denom = Normal.dot(ray.direction);
     if (abs(denom) < 1e-6) return false;
@@ -11,7 +11,6 @@ bool Plane::intersect(const Ray& ray, Hit& hit) const
     
     hit.point = ray.eye + t * ray.direction;
     hit.normal = signbit(denom) ? Normal : -Normal;
-    hit.material = material; 
 
     return true;
 } 

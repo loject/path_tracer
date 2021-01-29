@@ -6,8 +6,7 @@
 
 bool Triangle::intersect(const Ray& ray, Hit& hit) const
 {
-    Plane trianglePlane(Point0, (Point2 - Point0).cross(Point1 - Point0));
-    if (!trianglePlane.intersect(ray, hit)) return false;
+    if (!Plane::intersect(Point0, (Point2 - Point0).cross(Point1 - Point0), ray, hit)) return false;
     vec3f P0P = (Point0 - hit.point).unit();
     vec3f P1P = (Point1 - hit.point).unit();
     vec3f P2P = (Point2 - hit.point).unit();
