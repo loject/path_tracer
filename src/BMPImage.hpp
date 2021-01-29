@@ -13,7 +13,8 @@ class BMPImage
     
     public:
         BMPImage():m_data(NULL) {}
-        BMPImage(uint32_t width, uint32_t height): m_width(width), m_height(height), m_data(new vec4ub[m_width * m_height]) {}
+        BMPImage(BMPImage&) = delete;
+        BMPImage(BMPImage&&) = delete;
         BMPImage(uint32_t width, uint32_t height, vec4ub color): m_width(width), m_height(height), m_data(new vec4ub[m_width * m_height]) 
         {
             for (size_t i = 0; i < m_width * m_height; ++i)
