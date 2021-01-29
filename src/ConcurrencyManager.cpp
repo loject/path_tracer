@@ -44,7 +44,13 @@ std::function<void(void)> ConcurrencyManager::peakTask()
 
 void ConcurrencyManager::wait()
 {
-    while (m_freeThreads != m_threads.size()) std::this_thread::sleep_for(std::chrono::microseconds(100));
+    while (true)
+    {
+        std::unique_lock ul(m_common);
+        if (m_freeThreads == m_threads.size() && m_queue.size() == 0) break;
+        ul.unlock();
+        std::this_thread::sleep_for(std::chrono::microseconds(100));
+    }
 }
 
 size_t ConcurrencyManager::tasksLeft() const 
