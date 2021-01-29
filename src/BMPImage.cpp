@@ -30,7 +30,8 @@ bool BMPImage::SaveBMPImage(std::string_view FileName) const
             uint32_t colors_used{ 0 };               // No. color indexes in the color table. Use 0 for the max number of colors allowed by bit_count
             uint32_t colors_important{ 0 };          // No. of colors used for displaying the bitmap. If 0 all colors are required
         } BMPInfoHeader;
-        BMPInfoHeader.size = m_width * m_height;
+        BMPFileHeader.offset_data = sizeof(BMPFileHeader) + sizeof(BMPInfoHeader) ;
+        BMPInfoHeader.size = sizeof(BMPInfoHeader);
         BMPInfoHeader.width = m_width;
         BMPInfoHeader.height = m_height;
         #pragma pack(pop)
