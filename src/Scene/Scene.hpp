@@ -7,7 +7,7 @@
 
 struct Scene
 {
-    std::vector<Primitive*> primitives;
+    std::vector<std::unique_ptr<Primitive>> primitives;
     Material defaultMaterial;
 
     bool nearestIntersect(const Ray& ray, Hit& hit) const; 
