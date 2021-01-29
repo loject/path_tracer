@@ -2,10 +2,10 @@
 
 #include <cassert>
 
-#include "../math.hpp"
-#include "../Utils.hpp"
+#include "math.hpp"
+#include "Utils.hpp"
 #include "Primitive.hpp"
-#include "Material.hpp"
+#include "Scene/Material.hpp"
 
 struct Plane: public Primitive
 {

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../math.hpp"
-#include "../Utils.hpp"
+#include "math.hpp"
+#include "Utils.hpp"
 
 class Primitive
 {
