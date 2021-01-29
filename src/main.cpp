@@ -10,14 +10,12 @@
 #include "BMPImage.hpp"
 #include "Camera.hpp"
 #include "Scene/Scene.hpp"
-#include "Scene/Sphere.hpp"
-#include "Scene/Plane.hpp"
-#include "Scene/Triangle.hpp"
+#include "Scene/Primitives/Primitives.hpp"
 
-const size_t IMAGE_WIDTH = 1280;
+const size_t IMAGE_WIDTH = 1780;
 const size_t IMAGE_HEIGHT = 720;
 const std::string IMAGE_FILE_NAME = getCurrentDateTImeStr() + ".bmp";
-const size_t SAMPLE_PER_PIXEL = 32;
+const size_t SAMPLE_PER_PIXEL = 8;
 const size_t MAX_DEPTH = 16;
 const size_t TILE_WIDTH = 32;
 const size_t TILE_HEIGHT = 32;
@@ -89,6 +87,7 @@ int main()
     scene.primitives.push_back(std::make_unique<Plane>(vec3f(0, -.5, 0), vec3f(1., 1., 0.), Material(vec3f(.2, .32, .2), vec3f(0.65), 0.4)));
     scene.primitives.push_back(std::make_unique<Triangle>(vec3f(-5., 0, 5), vec3f(0., 5., 5), vec3f(5., 0., 5), Material(vec3f(.2, .7, .2), vec3f(0.2), .5)));
     scene.primitives.push_back(std::make_unique<Triangle>(vec3f(-1, 1, 2), vec3f(-1, 2.5, 5), vec3f(-1, 1, 3), Material(vec3f(.6, .2, .2), vec3f(0.2), .5)));
+    scene.primitives.push_back(std::make_unique<Rectangle>(vec3f(0, 10, 5), vec3f(10, 10, 5), vec3f(10, 1, 5), vec3f(0, 1, 5), Material(vec3f(0, 0, 0), vec3f(0.2), .12)));
     
     ConcurrencyManager cm;
     for (size_t y = 0; y < IMAGE_HEIGHT; y += TILE_HEIGHT)

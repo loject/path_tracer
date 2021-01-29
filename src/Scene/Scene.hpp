@@ -1,9 +1,9 @@
 #pragma once
 
 #include <vector>
-#include "Primitive.hpp"
-#include "../math.hpp"
-#include "../Utils.hpp"
+#include "Primitives/Primitive.hpp"
+#include "math.hpp"
+#include "Utils.hpp"
 
 struct Scene
 {
